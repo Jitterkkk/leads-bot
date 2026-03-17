@@ -33,13 +33,28 @@ def webhook():
     if etapa_user.etapa == "nome":
         lead = Lead(telefone=telefone, nome=mensagem)
         db.add(lead)
-        # atualiza a etapa do usuário para "interesse" e salva no banco
+
+        etapa_user.etapa = "cpf"
+        db.commit()
+        return jsonify({"resposta": "Qual é o seu CPF?"})
+    
+    elif etapa_user.etapa == "cpf":
+        lead = db.query(Lead).filter_by(telefone=telefone).first()
+        lead.cpf = mensagem
+
+        etapa_user.etapa = "cidade"
+        db.commit()
+        return jsonify({"resposta": "Em qual cidade você mora?"})
+    
+    elif etapa_user.etapa == "cidade":
+        lead = db.query(Lead).filter_by(telefone=telefone).first()
+        lead.cidade = mensagem
+        
         etapa_user.etapa = "interesse"
         db.commit()
-        # pergunta o interesse do usuário
         return jsonify({"resposta": "Qual seu interesse?"})
     
-    # se o usuário já tiver respondido o nome, salva o interesse e finaliza o cadastro
+    
     elif etapa_user.etapa == "interesse":
         lead = db.query(Lead).filter_by(telefone=telefone).first()
         lead.interesse = mensagem

@@ -13,5 +13,5 @@ class Etapa(Base):
     __tablename__ = "etapas"
 
     id = Column(Integer, primary_key=True, index=True)
-    telefone = Column(Integer, primary_key=True, index=true)
+    telefone = Column(Integer, primary_key=True, index=True)
     etapa = Column(String) 

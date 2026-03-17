@@ -8,6 +8,8 @@ class Lead(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     telefone = Column(String)
     nome = Column(String)
+    cpf = Column(String)
+    cidade = Column(String)
     interesse = Column(String)
 
 # tabela para controlar a etapa do fluxo de cada usuário

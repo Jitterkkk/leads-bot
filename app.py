@@ -35,6 +35,14 @@ def webhook():
 
     # cria uma sessão para interagir com o banco de dados
     db = SessionLocal()
+
+    # resetar a conversa se o usuário enviar a mensagem "resetar"
+    if mensagem.lower() == "resetar":
+        # deleta o lead e a etapa do usuário com base no telefone
+        db.query(Etapa).filter_by(telefone=telefone).delete()
+        db.query(Lead).filter_by(telefone=telefone).delete()
+        db.commit()
+        return jsonify({"resposta": "Conversa reiniciada! Vamos começar de novo 😄\nQual seu nome?"})
     # verifica a etapa atual do usuário (telefone) no fluxo de cadastro
     etapa_user = db.query(Etapa).filter_by(telefone=telefone).first()
 

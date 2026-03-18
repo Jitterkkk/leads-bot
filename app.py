@@ -54,6 +54,10 @@ def webhook():
         return jsonify({"resposta": "Qual é o seu CPF?"})
     
     elif etapa_user.etapa == "cpf":
+
+        if not validar_cpf(mensagem):
+            return jsonify({"resposta": "CPF inválido. Por favor, insira um CPF válido."})
+        
         lead = db.query(Lead).filter_by(telefone=telefone).first()
         lead.cpf = mensagem
 

@@ -51,7 +51,7 @@ def webhook():
 
         etapa_user.etapa = "cpf"
         db.commit()
-        return jsonify({"resposta": "Qual é o seu CPF?"})
+        return jsonify({"resposta": "Perfeito! Agora me informe seu CPF 👇"})
     
     elif etapa_user.etapa == "cpf":
 
@@ -63,7 +63,7 @@ def webhook():
 
         etapa_user.etapa = "cidade"
         db.commit()
-        return jsonify({"resposta": "Em qual cidade você mora?"})
+        return jsonify({"resposta": "Boa! Em qual cidade você mora?"})
     
     elif etapa_user.etapa == "cidade":
         lead = db.query(Lead).filter_by(telefone=telefone).first()
@@ -71,7 +71,7 @@ def webhook():
         
         etapa_user.etapa = "interesse"
         db.commit()
-        return jsonify({"resposta": "Qual seu interesse?"})
+        return jsonify({"resposta": "Show! Qual serviço você está procurando?"})
     
     
     elif etapa_user.etapa == "interesse":
@@ -82,7 +82,7 @@ def webhook():
         etapa_user.etapa = "finalizado"
         db.commit()
 
-        return jsonify({"resposta": "Cadastro finalizado! Obrigado! 🙌"})
+        return jsonify({"resposta": "Cadastro concluído com sucesso! Em breve entraremos em contato 🚀"})
     
     return jsonify({"resposta": "Fluxo Finalizado."})
 

@@ -10,6 +10,21 @@ app = Flask(__name__)
 # criação das tabelas no banco de dados (se ainda não existirem)
 Base.metadata.create_all(bind=engine)
 
+def validar_cpf(cpf):
+    cpf = ''.join(filter(str.isdigit, cpf))  # Remove caracteres não numéricos
+
+    if len(cpf) != 11 or cpf == cpf[0] * 11:
+        return False
+    
+    for i in range(9, 11):
+        valor = sum((int(cpf[num]) * ((i+1) - num) for num in range(0, i)))
+        digito = ((valor * 10) % 11) % 10
+
+        if int(cpf[i]) != digito:
+            return False
+        
+    return True
+
 # rota para receber as mensagens do WhatsApp (webhook)
 @app.route("/webhook", methods=["POST"])
 def webhook():

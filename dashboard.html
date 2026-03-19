@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Leads</title>
+  <meta charset="UTF-8">
+  <title>Dashboard de Leads</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 p-6">
+
+  <h1 class="text-3xl font-bold mb-6 text-center">📊 Leads Capturados</h1>
+
+  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-6">
     
+    <table class="w-full table-auto">
+      <thead>
+        <tr class="bg-gray-200 text-left">
+          <th class="p-3">Nome</th>
+          <th class="p-3">Telefone</th>
+          <th class="p-3">CPF</th>
+          <th class="p-3">Cidade</th>
+          <th class="p-3">Interesse</th>
+        </tr>
+      </thead>
+
+      <tbody id="tabela-leads">
+        <!-- dados vão entrar aqui -->
+      </tbody>
+    </table>
+
+  </div>
+
 </body>
 </html>

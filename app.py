@@ -94,6 +94,23 @@ def webhook():
     
     return jsonify({"resposta": "Fluxo Finalizado."})
 
+@app.route("/leads", methods=["GET"])
+def listar_leads():
+    db = SessionLocal()
+    leads = db.query(Lead).all()
+
+    resultado = []
+
+    for lead in leads:
+        resultado.append({
+            "nome": lead.nome,
+            "telefone": lead.telefone,
+            "cpf": lead.cpf,
+            "cidade": lead.cidade,
+            "interesse": lead.interesse
+        })
+    return jsonify(resultado)
+
 # roda a aplicação Flask em modo de desenvolvimento
 if __name__ == "__main__":
     app.run(debug=True)

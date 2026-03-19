@@ -29,5 +29,30 @@
 
   </div>
 
+  <script>
+    async function carregarLeads() {
+      const response = await fetch("http://127.0.0.1:5000/leads");
+      const leads = await response.json();
+
+      const tabela = document.getElementById("tabela-leads");
+
+      tabela.innerHTML = "";
+
+      leads.forEach(lead => {
+        tabela.innerHTML += `
+          <tr class="border-b hover:bg-gray-50">
+            <td class="p-3">${lead.nome || "-"}</td>
+            <td class="p-3">${lead.telefone || "-"}</td>
+            <td class="p-3">${lead.cpf || "-"}</td>
+            <td class="p-3">${lead.cidade || "-"}</td>
+            <td class="p-3">${lead.interesse || "-"}</td>
+          </tr>
+        `;
+      });
+    }
+
+    carregarLeads();
+  </script>
+
 </body>
 </html>

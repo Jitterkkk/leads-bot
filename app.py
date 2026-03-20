@@ -1,11 +1,11 @@
-# importação do Flask para criar a API, request para receber os dados e jsonify para enviar respostas em formato JSON
 from flask import Flask, request, jsonify 
-# importação do banco de dados e dos modelos (tabelas) para interagir com eles
 from database import SessionLocal, Base, engine
 from models import Lead, Etapa
+from flask_cors import CORS
 
 # criação da aplicação Flask
 app = Flask(__name__)
+CORS(app)
 
 # criação das tabelas no banco de dados (se ainda não existirem)
 Base.metadata.create_all(bind=engine)
